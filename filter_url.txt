@@ -5,3 +5,9 @@ docin.com
 360doc.com
 mayiwenku.com
 book118.com
+bilibili.com
+douban.com
+qq.com
+youku.com
+iqiyi.com
+jd.com
