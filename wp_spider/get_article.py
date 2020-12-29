@@ -6,6 +6,8 @@ import requests
 import cchardet
 import extractor
 from threading import Thread
+from queue import Queue
+from wp_spider.fakeorigin.translate import translate_text
 
 class Down_article(Thread):
     '''
@@ -73,19 +75,27 @@ class Down_article(Thread):
         ex.extract(url,source)
 
         # 过滤文章,质量不少于10000分, 并且字数超过5000的不要(字数太多,翻译容易出错)
-        if ex.score > 10000 and ex.text_count < 5000:
-            title = ex.title
-            content = ex.format_text    #带源码的内容
-            # content = ex.clean_text #不带源码图片，只是纯文字
+        # if ex.score > 10000 and ex.text_count < 5000:
+        title = ex.title
+        content = ex.format_text    #带源码的内容
+        # content = ex.clean_text #不带源码图片，只是纯文字
 
-            # 筛选下文章，标题小于5个字，大于35的不要
-            # if len(title) > 5 and len(title) < 35:
+        # print('标题：{}'.format(title))
+        # print('正文：{}'.format(content))
+        print('正在伪原创内容中...===============================================')
+        res_2 = translate_text(content)
+        print('伪原创完毕，等待写入文件')
+        # print('伪原创内容：{}'.format(translate_text(content)))
+        try:
+            with open(path+'{}.html'.format(title),'w',encoding='utf-8') as fw:
+                fw.write('原始正文：{}，\n\n=============================伪原创内容：{}'.format(content,res_2))
+                print('{}：保存成功'.format(title))
+        except os.error as err:
+            print('保存内容出错：{}，err：{}'.format(title,err))
 
-            # 清洗过滤内容
-            # content = filter_content.clean_content(ex.format_text)
-            try:
-                with open(path+'{}.html'.format(title),'w',encoding='utf-8') as fw:
-                    fw.write(content)
-                    print('{}：保存成功'.format(title))
-            except os.error as err:
-                print('保存内容出错：{}，err：{}'.format(title,err))
+
+if __name__ == '__main__':
+    d_queue = Queue()
+    d_queue.put(('seo', 'https://zhidao.baidu.com/question/1434508648904305139.html?qbl=relate_question_4&word=seo%BA%CDsem%B5%C4%C7%F8%B1%F0%CA%C7%CA%B2%C3%B4%3F'))
+    down = Down_article(d_queue)
+    down.start()

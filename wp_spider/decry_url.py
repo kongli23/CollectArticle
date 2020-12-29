@@ -32,4 +32,6 @@ class Decry_urllist(Thread):
                 if con in real_url:
                     return
             self.download_queue.put((kw, real_url))
+            with open('autu_getcontent/links.txt', 'a', encoding='utf-8') as f:
+                f.write('{}\n'.format(real_url))
             # print((kw, real_url))

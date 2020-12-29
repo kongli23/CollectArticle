@@ -87,7 +87,8 @@ class Extractor(object):
         for text in content.split("\n"):
             if "img" in text:
                 self.img_count += 1
-                self.format_text += '<p align="center">{}</p>'.format(text)
+                # self.format_text += '<p align="center">{}</p>'.format(text)
+                self.format_text += '<div>{}</div>'.format(text)
             else:
                 text = text.strip()
                 if not text:
