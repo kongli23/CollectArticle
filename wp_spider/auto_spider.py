@@ -102,7 +102,7 @@ if __name__ == '__main__':
 
     # 解析快照链接类
     # for i in range(15):
-    d = decry_url.Decry_urllist(link_queue,download_queue,filter_url)
+    d = decry_url.Decry_urllist(link_queue, download_queue, filter_url)
     d.setDaemon(True)
     d.start()
 

@@ -3,7 +3,7 @@ import requests
 import time
 import random
 import re
-from translate.user_agent import RandomUserAgent
+from wp_spider.translate.user_agent import RandomUserAgent
 
 class translate_youdao():
     def __init__(self, msg):

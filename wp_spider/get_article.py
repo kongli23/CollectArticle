@@ -5,7 +5,6 @@ import os
 import requests
 import cchardet
 import extractor
-import filter_content
 from threading import Thread
 
 class Down_article(Thread):

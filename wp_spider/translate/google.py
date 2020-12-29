@@ -5,7 +5,7 @@ import urllib.parse
 import requests
 import execjs
 import re
-from translate.youdao import youdao
+from wp_spider.translate.youdao import youdao
 
 class translate_google():
     def __init__(self,word_limit=1000, dl_words=300):
@@ -182,7 +182,7 @@ def google(text):
 
 if __name__ == '__main__':
     text = ""
-    with open('dome.txt','r',encoding='utf-8') as f:
+    with open('dome.txt', 'r', encoding='utf-8') as f:
         text = f.read()
     # print(text)
     res = google(text)
