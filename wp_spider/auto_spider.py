@@ -21,7 +21,7 @@ class GetLinks(Thread):
             try:
                 kw = self.kw_queue.get()
 
-                print('正在下载：{}，源码'.format(kw))
+                print('正在搜索：{}，文章'.format(kw))
                 source = self.download(kw)
                 if source is None:
                     continue
